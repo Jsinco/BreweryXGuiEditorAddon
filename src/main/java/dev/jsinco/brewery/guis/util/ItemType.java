@@ -3,10 +3,10 @@ package dev.jsinco.brewery.guis.util;
 import com.dre.brewery.BreweryPlugin;
 import com.dre.brewery.utility.BUtil;
 import dev.jsinco.brewery.utility.Util;
+import io.papermc.paper.datacomponent.DataComponentTypes;
+import io.papermc.paper.datacomponent.item.TooltipDisplay;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.entity.Item;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.Nullable;
@@ -61,9 +61,6 @@ public final class ItemType {
     public static final ItemType EDITOR_COLOR = new ItemType(51, "&#87F5A0&lEdit Color", Material.RED_DYE, modLore);
     public static final ItemType EDITOR_DRINK_MESSAGE = new ItemType(52, "&#87F5A0&lEdit Drink Message", Material.WRITABLE_BOOK, modLore);
     public static final ItemType EDITOR_DRINK_TITLE = new ItemType(53, "&#87F5A0&lEdit Drink Title", Material.WRITABLE_BOOK, modLore);
-
-
-
 
 
     private String FIELD_NAME;
@@ -152,7 +149,7 @@ public final class ItemType {
         if (lore != null) {
             meta.setLore(Util.colorList(lore));
         }
-        meta.addItemFlags(ItemFlag.HIDE_ITEM_SPECIFICS);
+        itemStack.setData(DataComponentTypes.TOOLTIP_DISPLAY, TooltipDisplay.tooltipDisplay().hideTooltip(true).build());
         itemStack.setItemMeta(meta);
         return getItemForItemStack(itemStack, data);
     }
@@ -171,7 +168,6 @@ public final class ItemType {
         itemStack.setItemMeta(meta);
         return itemStack;
     }
-
 
 
     @Nullable
